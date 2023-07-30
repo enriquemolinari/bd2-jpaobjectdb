@@ -65,4 +65,8 @@ public class Telefono {
 	private void setId(int id) {
 		this.id = id;
 	}
+
+	public boolean suNumberoEs(String unNumero) {
+		return this.nro.equals(unNumero);
+	}
 }

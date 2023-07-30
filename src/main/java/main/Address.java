@@ -23,4 +23,8 @@ public class Address {
 	private void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+
+	public boolean suCalleEs(String unaCalle) {
+		return this.direccion.equals(unaCalle);
+	}
 }

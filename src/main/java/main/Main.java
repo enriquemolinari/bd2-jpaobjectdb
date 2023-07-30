@@ -99,7 +99,7 @@ public class Main {
 			em.clear();
 
 			Persona e = em.find(Persona.class, 1L);
-			System.out.println(e.getNombre());
+			System.out.println(e.nombre());
 			e.printTelefonos();
 
 		} catch (Exception e) {

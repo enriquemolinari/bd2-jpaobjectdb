@@ -47,23 +47,27 @@ public class Persona {
 
 	}
 
-	public void direccion(String dir) {
-		this.direccion = new Address(dir);
-	}
-
-	public void fechaNacimiento(LocalDate fecha) {
-		this.fechaNac = fecha;
-	}
-
 	public void addTelefono(Telefono t) {
 		this.telefonos.add(t);
 	}
 
-	public String getNombre() {
+	public boolean seLlama(String unNombre) {
+		return this.nombre.equals(unNombre);
+	}
+
+	public boolean viveEn(String unaDireccion) {
+		return this.direccion.suCalleEs(unaDireccion);
+	}
+
+	public boolean suTelefonoEs(String string) {
+		return this.telefonos.stream().anyMatch(t -> t.suNumberoEs(string));
+	}
+
+	private String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	private void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
@@ -97,5 +101,9 @@ public class Persona {
 
 	private void setDireccion(Address direccion) {
 		this.direccion = direccion;
+	}
+
+	public String nombre() {
+		return nombre;
 	}
 }

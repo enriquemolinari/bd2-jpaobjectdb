@@ -4,3 +4,4 @@ target/
 /bin/
 /derby.log
 leeme.txt
+/myDbTestFile.tmp
