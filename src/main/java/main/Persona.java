@@ -1,15 +1,13 @@
 package main;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -19,17 +17,16 @@ public class Persona {
 	private Long id;
 	private String nombre;
 
-	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_persona")
+	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<Telefono> telefonos = new ArrayList<>();
 
-	private LocalDate fechaNac;
+	private LocalDateTime fechaNac;
 
 	@Embedded
 	private Address direccion;
 
 	public Persona(Long id, String nombre, String direccion,
-			LocalDate fechaNacimiento) {
+			LocalDateTime fechaNacimiento) {
 		// validate all !
 		this.id = id;
 		this.nombre = nombre;
@@ -87,11 +84,11 @@ public class Persona {
 		this.id = id;
 	}
 
-	private LocalDate getFecha() {
+	private LocalDateTime getFecha() {
 		return fechaNac;
 	}
 
-	private void setFecha(LocalDate fecha) {
+	private void setFecha(LocalDateTime fecha) {
 		this.fechaNac = fecha;
 	}
 

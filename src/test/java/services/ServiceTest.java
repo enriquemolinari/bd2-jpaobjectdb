@@ -2,7 +2,7 @@ package services;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.function.Consumer;
 
 import javax.persistence.EntityManager;
@@ -30,22 +30,31 @@ public class ServiceTest {
 
 	@Test
 	public void puedoPersisterUnaPersonaConTelefonos() {
-		inTransactionExecute((em) -> {
-			Persona enrique = new Persona(1L, "Enrique", "San Martin 123",
-					LocalDate.now().minusYears(40));
+		inTransactionExecute(
 
-			Telefono t = new Telefono("234234");
-			enrique.addTelefono(t);
+				(em) -> {
+					Persona enrique = new Persona(1L, "Enrique",
+							"San Martin 123",
+							LocalDateTime.now().minusYears(40));
 
-			em.persist(enrique);
-		});
+					Telefono t = new Telefono("234234");
+					enrique.addTelefono(t);
 
-		inTransactionExecute((em) -> {
-			Persona enrique = em.find(Persona.class, 1L);
-			assertTrue(enrique.seLlama("Enrique"));
-			assertTrue(enrique.viveEn("San Martin 123"));
-			assertTrue(enrique.suTelefonoEs("234234"));
-		});
+					em.persist(enrique);
+				}
+
+		);
+
+		inTransactionExecute(
+
+				(em) -> {
+					Persona enrique = em.find(Persona.class, 1L);
+					assertTrue(enrique.seLlama("Enrique"));
+					assertTrue(enrique.viveEn("San Martin 123"));
+					assertTrue(enrique.suTelefonoEs("234234"));
+				}
+
+		);
 	}
 
 	public void inTransactionExecute(Consumer<EntityManager> bloqueDeCodigo) {

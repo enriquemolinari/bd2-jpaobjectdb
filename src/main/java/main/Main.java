@@ -1,6 +1,6 @@
 package main;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,13 +17,24 @@ public class Main {
 		EntityTransaction tx = em.getTransaction();
 		try {
 			tx.begin();
-			Persona p = new Persona(1L, "Enrique", "San Martin 123",
-					LocalDate.now().minusYears(40));
 
-			Telefono t = new Telefono("234234");
+			// TypedQuery<Persona> q = em.createQuery(
+			// "select p from Persona p where p.fechaNac > :fecha",
+			// Persona.class);
+			// q.setParameter("fecha", LocalDateTime.of(1988, 8, 10, 17, 01,
+			// 00));
+			// List<Persona> personas = q.getResultList();
+			// for (Persona persona : personas) {
+			// System.out.println(persona.nombre());
+			// }
+
+			Persona p = new Persona(3L, "Joaquin", "Colon 123",
+					LocalDateTime.now().minusYears(40));
+
+			Telefono t = new Telefono("123");
 			p.addTelefono(t);
 
-			// em.persist(t);
+			em.persist(t);
 			em.persist(p);
 
 			// objectdb soporta entidades sin PK
@@ -96,11 +107,11 @@ public class Main {
 			// em.persist(e);
 
 			tx.commit();
-			em.clear();
+			// em.clear();
 
-			Persona e = em.find(Persona.class, 1L);
-			System.out.println(e.nombre());
-			e.printTelefonos();
+			// Persona e = em.find(Persona.class, 1L);
+			// System.out.println(e.nombre());
+			// e.printTelefonos();
 
 		} catch (Exception e) {
 			tx.rollback();
